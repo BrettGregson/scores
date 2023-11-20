@@ -2,6 +2,7 @@ import { NavigationItem } from "./types";
 
 export const NavigationData: NavigationItem[] = [
   { name: "Dashboard", href: "/", current: false },
+  { name: "Create League", href: "/create-league", current: false },
   { name: "Fixtures", href: "/fixtures", current: false },
   { name: "Login", href: "/login", current: false },
   { name: "Join", href: "/join", current: false },

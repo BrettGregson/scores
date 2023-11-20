@@ -9,3 +9,16 @@ export type Score = {
   teamId: number;
   score: number;
 };
+
+export type FixtureTeam = {
+  teamId: number;
+  name: string;
+  icon: string;
+}
+
+export type Fixture = {
+  matchDate: string;
+  matchId: number;
+  home: FixtureTeam,
+  away: FixtureTeam
+};

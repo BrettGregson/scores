@@ -1,17 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Navbar from "./../components/navbar/Navbar";
-import Link from "next/link";
-import { getNavigationItemByName } from "../navigation";
 import SubmitButton from "../components/submit-button/SubmitButton";
 import PageTitle from "../components/page-title/PageTitle";
+import { getNavigationItemByName } from "../navigation";
+import Link from "next/link";
 
-const JoinPage = () => {
+const CreateLeaguePage = () => {
   return (
     <>
       <Navbar />
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <PageTitle title={"Create an account"} isCentered={true} />
+          <PageTitle title={"Create League"} isCentered={true} />
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -21,11 +23,12 @@ const JoinPage = () => {
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 "
               >
-                Email address
+                League Name
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
+                  id="text"
+                  maxLength={24}
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -36,37 +39,17 @@ const JoinPage = () => {
             </div>
 
             <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 "
-                >
-                  Password
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <SubmitButton label={"Join"} />
+              <SubmitButton label={"Create League"} />
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
+            By creating a league you agree to the {}
             <Link
-              href={getNavigationItemByName("Login") ?? "#"}
+              href={getNavigationItemByName("Join") ?? "#"}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Already have an account? Login here
+              terms and conditions
             </Link>
           </p>
         </div>
@@ -75,4 +58,4 @@ const JoinPage = () => {
   );
 };
 
-export default JoinPage;
+export default CreateLeaguePage;

@@ -2,25 +2,10 @@
 
 import React, { useState } from "react";
 import Navbar from "./../components/navbar/Navbar";
-import Image from "next/image";
-import ScoreInput from "./../components/score-input/ScoreInput";
 import SubmitButton from "./../components/submit-button/SubmitButton";
-import { Score } from "./../types";
-
-type Fixture = {
-  matchDate: string;
-  matchId: number;
-  home: {
-    teamId: number;
-    name: string;
-    icon: string;
-  };
-  away: {
-    teamId: number;
-    name: string;
-    icon: string;
-  };
-};
+import PageTitle from "../components/page-title/PageTitle";
+import FixtureItem from "../components/fixture-item/FixtureItem";
+import { Score, Fixture, FixtureTeam } from "./../types";
 
 const fixtures: Fixture[] = [
   {
@@ -182,6 +167,7 @@ const FixturesPage = () => {
     setScores(updatedScores);
   };
 
+  // Determines if the current fixture is the first occurrence of a date
   const isDateFirstOccurrence = (
     fixture: Fixture,
     index: number,
@@ -194,94 +180,23 @@ const FixturesPage = () => {
     <>
       <Navbar />
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <h2 className="mt-10 text-2xl font-bold leading-9 tracking-tight text-emerald-800">
-          Fixtures
-        </h2>
+        <PageTitle title={"Fixtures"} isCentered={false} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
           {fixtures.map((fixture, index) => (
-            <>
-              {isDateFirstOccurrence(fixture, index, fixtures) && (
-                <div className="col-span-1 lg:col-span-2 pt-6">
-                  <h4 className="font-bold text-slate-700 text-bold">
-                    {fixture.matchDate}
-                  </h4>
-                </div>
+            <FixtureItem
+              matchDate={fixture.matchDate}
+              matchId={fixture.matchId}
+              home={fixture.home}
+              away={fixture.away}
+              scores={scores}
+              handleScoreChange={handleScoreChange}
+              isDateFirstOccurrence={isDateFirstOccurrence(
+                fixture,
+                index,
+                fixtures
               )}
-
-              <div
-                className="p-2 bg-white rounded-md text-gray-900 border border-slate-300"
-                key={fixture.matchId}
-              >
-                <div className="grid grid-cols-[auto,1fr,auto,1fr,auto] items-center">
-                  <div className="w-12">
-                    <Image
-                      src={fixture.home.icon}
-                      alt={fixture.home.name}
-                      width={48}
-                      height={48}
-                      className="w-auto"
-                    />
-                  </div>
-
-                  <div className="text-center font-bold text-slate-700 text-sm	">
-                    {fixture.home.name}
-                  </div>
-
-                  <div className="w-20 flex flex-grow bg-emerald-800 items-center rounded-md font-bold">
-                    <div className="flex-grow">
-                      <ScoreInput
-                        scoreData={{
-                          matchId: fixture.matchId,
-                          teamId: fixture.home.teamId,
-                          score:
-                            scores.find(
-                              (s) =>
-                                s.matchId === fixture.matchId &&
-                                s.teamId === fixture.home.teamId
-                            )?.score || 0,
-                        }}
-                        handleScoreChange={handleScoreChange}
-                      />
-                    </div>
-
-                    <div className="w-12 text-white text-bold text-center">
-                      :
-                    </div>
-
-                    <div className="flex-grow">
-                      <ScoreInput
-                        scoreData={{
-                          matchId: fixture.matchId,
-                          teamId: fixture.away.teamId,
-                          score:
-                            scores.find(
-                              (s) =>
-                                s.matchId === fixture.matchId &&
-                                s.teamId === fixture.away.teamId
-                            )?.score || 0,
-                        }}
-                        handleScoreChange={handleScoreChange}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="text-center font-bold text-slate-700 text-sm">
-                    {fixture.away.name}
-                  </div>
-
-                  <div className="w-12">
-                    <Image
-                      src={fixture.away.icon}
-                      alt={fixture.away.name}
-                      width={48}
-                      height={48}
-                      className="w-auto"
-                    />
-                  </div>
-                </div>
-              </div>
-            </>
+            />
           ))}
         </div>
 
