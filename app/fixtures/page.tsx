@@ -5,6 +5,7 @@ import Navbar from "./../components/navbar/Navbar";
 import SubmitButton from "./../components/submit-button/SubmitButton";
 import PageTitle from "../components/page-title/PageTitle";
 import FixtureItem from "../components/fixture-item/FixtureItem";
+import TipText from "../components/tip-text/TipText";
 import { Score, Fixture, FixtureTeam } from "./../types";
 
 const fixtures: Fixture[] = [
@@ -182,9 +183,13 @@ const FixturesPage = () => {
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <PageTitle title={"Fixtures"} isCentered={false} />
 
+        <TipText text="Use the tab key to quickly jump to the next score" />
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
           {fixtures.map((fixture, index) => (
             <FixtureItem
+              index={index}
+              key={fixture.matchId}
               matchDate={fixture.matchDate}
               matchId={fixture.matchId}
               home={fixture.home}

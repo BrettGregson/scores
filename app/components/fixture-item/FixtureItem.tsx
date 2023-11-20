@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import ScoreInput from "../score-input/ScoreInput";
 import { Score, Fixture } from "./../../types";
@@ -7,6 +7,7 @@ type FixtureItemProps = Fixture & {
   isDateFirstOccurrence: boolean;
   scores: Score[];
   handleScoreChange: (score: Score) => void;
+  index: number;
 };
 
 const FixtureItem = ({
@@ -17,7 +18,16 @@ const FixtureItem = ({
   isDateFirstOccurrence,
   scores,
   handleScoreChange,
+  index,
 }: FixtureItemProps) => {
+  const [homeInputFocused, setHomeInputFocused] = useState(false);
+  const [awayInputFocused, setAwayInputFocused] = useState(false);
+
+  const bothInputsFocused = homeInputFocused && awayInputFocused;
+  const hasFocussedClass = bothInputsFocused
+    ? "bg-emerald-800"
+    : "bg-slate-800";
+
   return (
     <>
       {isDateFirstOccurrence && (
@@ -45,7 +55,9 @@ const FixtureItem = ({
             {home.name}
           </div>
 
-          <div className="w-20 flex flex-grow bg-emerald-800 items-center rounded-md font-bold">
+          <div
+            className={`w-20 flex flex-grow  items-center rounded-md font-bold ${hasFocussedClass}`}
+          >
             <div className="flex-grow">
               <ScoreInput
                 scoreData={{
@@ -56,6 +68,9 @@ const FixtureItem = ({
                       (s) => s.matchId === matchId && s.teamId === home.teamId
                     )?.score || 0,
                 }}
+                inputNumber={1}
+                groupId={index}
+                onFocusChange={() => setHomeInputFocused(true)}
                 handleScoreChange={handleScoreChange}
               />
             </div>
@@ -74,6 +89,9 @@ const FixtureItem = ({
                       (s) => s.matchId === matchId && s.teamId === away.teamId
                     )?.score || 0,
                 }}
+                inputNumber={2}
+                groupId={index}
+                onFocusChange={() => setAwayInputFocused(true)}
                 handleScoreChange={handleScoreChange}
               />
             </div>
