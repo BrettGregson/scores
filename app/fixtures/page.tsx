@@ -183,7 +183,7 @@ const FixturesPage = () => {
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <PageTitle title={"Fixtures"} isCentered={false} />
 
-        <TipText text="Use the tab key to quickly jump to the next score" />
+        <TipText text="The next score input will automatically be selected as you enter a score" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
           {fixtures.map((fixture, index) => (

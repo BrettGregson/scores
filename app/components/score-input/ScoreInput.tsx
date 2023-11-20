@@ -19,12 +19,12 @@ const ScoreInput = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (groupId === 1 && inputNumber === 1) {
-      const elementToFocus = document.getElementById(`score-input-${0}-${1}`);
+    if (groupId === 0 && inputNumber === 1) {
+      const elementToFocus = document.getElementById("score-input-0-1");
       if (elementToFocus instanceof HTMLInputElement) {
         console.log("focus first");
-        inputRef.current?.focus();
-        inputRef.current?.select();
+        elementToFocus?.focus();
+        elementToFocus?.select();
       }
     }
   }, [groupId, inputNumber]); // Dependencies to ensure this runs when groupId or inputNumber changes
@@ -54,6 +54,7 @@ const ScoreInput = ({
       ref={groupId === 1 && inputNumber === 1 ? inputRef : null}
       id={`score-input-${groupId}-${inputNumber}`}
       type="text"
+      // autoFocus={groupId === 1 && inputNumber === 1} // Autofocus conditionally
       value={score.toString()}
       className="w-full h-10 bg-transparent border-0 text-center focus:outline-none text-white text-bold"
       onChange={tabToNextOnChange}
