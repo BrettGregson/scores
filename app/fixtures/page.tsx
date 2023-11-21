@@ -14,12 +14,14 @@ const fixtures: Fixture[] = [
     matchId: 1,
     home: {
       teamId: 1,
-      name: "Manchester City",
+      name: "Man City",
+      shortName: "MCI",
       icon: "/clubs/manchester-city.png",
     },
     away: {
       teamId: 2,
       name: "Liverpool",
+      shortName: "LIV",
       icon: "/clubs/liverpool.png",
     },
   },
@@ -29,11 +31,13 @@ const fixtures: Fixture[] = [
     home: {
       teamId: 3,
       name: "Burnley",
+      shortName: "BUR",
       icon: "/clubs/burnley.png",
     },
     away: {
       teamId: 4,
       name: "West Ham",
+      shortName: "WHU",
       icon: "/clubs/west-ham.png",
     },
   },
@@ -42,12 +46,14 @@ const fixtures: Fixture[] = [
     matchId: 3,
     home: {
       teamId: 5,
-      name: "Luton Town",
+      name: "Luton",
+      shortName: "LUT",
       icon: "/clubs/luton.png",
     },
     away: {
       teamId: 6,
       name: "Crystal Palace",
+      shortName: "CRY",
       icon: "/clubs/crystal-palace.png",
     },
   },
@@ -57,11 +63,13 @@ const fixtures: Fixture[] = [
     home: {
       teamId: 7,
       name: "Newcastle",
+      shortName: "NEW",
       icon: "/clubs/newcastle.png",
     },
     away: {
       teamId: 8,
       name: "Chelsea",
+      shortName: "CHE",
       icon: "/clubs/chelsea.png",
     },
   },
@@ -71,11 +79,13 @@ const fixtures: Fixture[] = [
     home: {
       teamId: 9,
       name: "Forest",
+      shortName: "NFO",
       icon: "/clubs/nottingham-forest.png",
     },
     away: {
       teamId: 10,
       name: "Brighton",
+      shortName: "BHA",
       icon: "/clubs/brighton.png",
     },
   },
@@ -85,11 +95,13 @@ const fixtures: Fixture[] = [
     home: {
       teamId: 11,
       name: "Sheffield Utd",
+      shortName: "SHU",
       icon: "/clubs/sheffield.png",
     },
     away: {
       teamId: 12,
       name: "Bournemouth",
+      shortName: "BOU",
       icon: "/clubs/bournemouth.png",
     },
   },
@@ -99,11 +111,13 @@ const fixtures: Fixture[] = [
     home: {
       teamId: 13,
       name: "Brentford",
+      shortName: "BRE",
       icon: "/clubs/brentford.png",
     },
     away: {
       teamId: 14,
       name: "Arsenal",
+      shortName: "ARS",
       icon: "/clubs/arsenal.png",
     },
   },
@@ -113,11 +127,13 @@ const fixtures: Fixture[] = [
     home: {
       teamId: 15,
       name: "Spurs",
+      shortName: "TOT",
       icon: "/clubs/spurs.png",
     },
     away: {
       teamId: 16,
       name: "Villa",
+      shortName: "AVL",
       icon: "/clubs/villa.png",
     },
   },
@@ -127,11 +143,13 @@ const fixtures: Fixture[] = [
     home: {
       teamId: 17,
       name: "Everton",
+      shortName: "EVE",
       icon: "/clubs/everton.png",
     },
     away: {
       teamId: 18,
       name: "Manchester Utd",
+      shortName: "MUN",
       icon: "/clubs/united.png",
     },
   },
@@ -141,11 +159,13 @@ const fixtures: Fixture[] = [
     home: {
       teamId: 19,
       name: "Fulham",
+      shortName: "FUL",
       icon: "/clubs/fulham.png",
     },
     away: {
       teamId: 20,
       name: "Wolves",
+      shortName: "WOL",
       icon: "/clubs/wolves.png",
     },
   },

@@ -1,11 +1,64 @@
-import React from "react";
+"use client";
+
+import React, { useState, FormEvent } from "react";
+import FormError from "./../components/form-error/FormError";
 import Navbar from "./../components/navbar/Navbar";
+import PageTitle from "../components/page-title/PageTitle";
+import SubmitButton from "../components/submit-button/SubmitButton";
+import TextInput from "../components/text-input/TextInput";
 import Link from "next/link";
 import { getNavigationItemByName } from "../navigation";
-import SubmitButton from "../components/submit-button/SubmitButton";
-import PageTitle from "../components/page-title/PageTitle";
+import { postFetcher } from "../utils";
+import useSWR, { mutate } from "swr";
+
+const CREATE_USER_URL = "http://localhost:8080/user/create";
+
+type FormState = {
+  teamName: string;
+  email: string;
+  password: string;
+};
+
+type FormErrors = {
+  email?: string[];
+  teamName?: string[];
+  password?: string[];
+};
 
 const JoinPage = () => {
+  const [formData, setFormData] = useState<FormState>({
+    teamName: "",
+    email: "",
+    password: "",
+  });
+
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    console.log(formData);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormErrors({});
+
+    const endpoint = CREATE_USER_URL;
+    try {
+      const response = await mutate(endpoint, postFetcher(endpoint, formData));
+      console.log(response);
+
+      if (response && !response.success) {
+        setFormErrors(response.errors);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -15,45 +68,47 @@ const JoinPage = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 "
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+              <TextInput
+                label="Team Name"
+                id="teamName"
+                name="teamName"
+                type="text"
+                value={formData.teamName}
+                onChange={handleChange}
+              />
+              {formErrors.teamName && (
+                <FormError text={formErrors.teamName[0]} />
+              )}
             </div>
 
             <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 "
-                >
-                  Password
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+              <TextInput
+                label="Email address"
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+
+              {formErrors.email && <FormError text={formErrors.email[0]} />}
+            </div>
+
+            <div>
+              <TextInput
+                label="Password"
+                id="password"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+
+              {formErrors.password && (
+                <FormError text={formErrors.password[0]} />
+              )}
             </div>
 
             <div>

@@ -52,7 +52,8 @@ const FixtureItem = ({
           </div>
 
           <div className="text-center font-bold text-slate-700 text-sm">
-            {home.name}
+            <span className="hidden sm:block">{home.name}</span>
+            <span className="block sm:hidden">{home.shortName}</span>
           </div>
 
           <div
@@ -98,7 +99,8 @@ const FixtureItem = ({
           </div>
 
           <div className="text-center font-bold text-slate-700 text-sm">
-            {away.name}
+            <span className="hidden sm:block">{away.name}</span>
+            <span className="block sm:hidden">{away.shortName}</span>
           </div>
 
           <div className="w-12">

@@ -36,7 +36,7 @@ const ScoreInput = ({
   const tabToNextOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newScore = e.target.value;
     handleScoreChange({ matchId, teamId, score: +newScore });
-    if (newScore.length === 1) {
+    if (newScore.length === 1 || newScore.length === 0) {
       const siblingId =
         inputNumber === 2
           ? `score-input-${groupId + 1}-${1}`
@@ -55,11 +55,12 @@ const ScoreInput = ({
       id={`score-input-${groupId}-${inputNumber}`}
       type="text"
       // autoFocus={groupId === 1 && inputNumber === 1} // Autofocus conditionally
-      value={score.toString()}
+      // value={score.toString()}
       className="w-full h-10 bg-transparent border-0 text-center focus:outline-none text-white text-bold"
       onChange={tabToNextOnChange}
       onFocus={handleFocus}
       maxLength={1}
+      placeholder="0"
     />
   );
 };

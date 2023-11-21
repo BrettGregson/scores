@@ -13,6 +13,7 @@ export type Score = {
 export type FixtureTeam = {
   teamId: number;
   name: string;
+  shortName: string;
   icon: string;
 }
 
